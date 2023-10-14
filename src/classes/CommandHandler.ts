@@ -35,6 +35,10 @@ export class CommandHandler {
 		return this._moves.length
 	}
 
+	get halfOfMovesAmount(){
+		return this.movesAmount / 2
+	}
+	
 	validateMoves() {
 		const messages = this.getValidateMessagess();
 		messages.forEach(msg => console.error(chalk.red(msg)))
