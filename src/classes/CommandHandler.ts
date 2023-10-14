@@ -1,6 +1,6 @@
-import chalk from 'chalk';
 import { PermanentCommands } from "../const/permanentCommands"
 import { select } from '@inquirer/prompts';
+import chalk from 'chalk';
 
 const MIN_MOVES_AMOUNT = 3
 
@@ -38,10 +38,10 @@ export class CommandHandler {
 	get halfOfMovesAmount(){
 		return this.movesAmount / 2
 	}
-	
+
 	validateMoves() {
 		const messages = this.getValidateMessagess();
-		messages.forEach(msg => console.error(chalk.red(msg)))
+		messages.forEach(msg => console.log(chalk.red(msg)))
 		return !messages.length
 	}
 
@@ -53,15 +53,15 @@ export class CommandHandler {
 	}
 
 	private getValidateMessagess() {
-		const ValidateMessagess = [
+		const validateMessages = [
 			!this.checkAmount() && ValidateMessages.wrongAmount,
 			!this.checkOdd() && ValidateMessages.wrongOdd,
 			!this.checkUniq() && ValidateMessages.wrongUniq
 		].filter(Boolean)
 
-		console.log(ValidateMessages.example)
+		if(validateMessages.length) console.log(ValidateMessages.example)
 
-		return ValidateMessagess
+		return validateMessages
 	}
 
 	private checkAmount() {

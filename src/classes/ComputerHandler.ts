@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import _ from "lodash"
+import chalk from 'chalk';
 
 enum titles {
 	hmac = 'HMAC: ',
@@ -37,15 +38,15 @@ export class ComputerHandler {
 	}
 
 	showHmac() {
-		console.log(`${titles.hmac}${this._hmac}`)
+		console.log(chalk.blue(`${titles.hmac}${this._hmac}`))
 	}
 
 	showKey() {
-		console.log(`${titles.key}${this._key}`)
+		console.log(chalk.blue(`${titles.key}${this._key}`))
 	}
 
 	showMove() {
-		console.log(`${titles.move}${this._move}`)
+		console.log(chalk.green(`${titles.move}${this._move}`))
 	}
 
 	private generateHmac() {

@@ -3,6 +3,7 @@ import { CommandHandler } from "./CommandHandler"
 import { ComputerHandler } from "./ComputerHandler"
 import { Table } from "./Table"
 import { Rule } from "./Rule"
+import chalk from 'chalk';
 
 enum Titles{
 	userMove = 'Your move: '
@@ -52,6 +53,6 @@ export class Game {
 	}
 
 	showUserMove(userMove: string){
-		console.log(`${Titles.userMove}${userMove}`);
+		console.log(chalk.green(`${Titles.userMove}${userMove}`));
 	}
 }

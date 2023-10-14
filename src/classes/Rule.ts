@@ -1,5 +1,6 @@
 import { CommandHandler } from "./CommandHandler";
 import { GameResults } from "../const/gameResults";
+import chalk from "chalk"
 
 export interface RulesObject {
 	[userMove: string]: {
@@ -66,7 +67,12 @@ export class Rule {
 		return this._rulesObject
 	}
 
+	getRoundResult(userMove: string, computerMove: string){
+		return this._rulesObject[userMove][computerMove]
+	}
+
 	showRoundResult(userMove: string, computerMove: string) {
-		console.log(this._rulesObject[userMove][computerMove])
+		const roundResult = this.getRoundResult(userMove, computerMove)
+		console.log(chalk.bgBlue(roundResult))
 	}
 }
