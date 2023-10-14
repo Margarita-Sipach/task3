@@ -6,7 +6,7 @@ export interface RulesObject {
 	[userMove: string]: {
 		[computerMove: string]: GameResults;
 	};
-};
+}
 
 export class Rule {
 	private _commands: CommandHandler;
@@ -42,25 +42,34 @@ export class Rule {
 		})
 	}
 
-	private getMovesRighterSelected(moves: string[], selectedMoveIndex: number) {
+	private getMovesRighterSelected(
+		moves: string[], 
+		selectedMoveIndex: number
+	) {
 		return [
 			...moves.slice(selectedMoveIndex),
 			...moves.slice(0, selectedMoveIndex)
 		]
 	}
 
-	private generateRoundResult(movesRighterUsers: string[], userMove: string, computerMove: string) {
+	private generateRoundResult(
+		movesRighterUsers: string[], 
+		userMove: string, 
+		computerMove: string
+	) {
 		const halfI = this._commands.halfOfMovesAmount + 1;
-		const roundResultHelper = (sliceArgs: number[]) => movesRighterUsers.slice(...sliceArgs).includes(computerMove)
+		const roundResultHelper = (sliceArgs: number[]) => {
+			return movesRighterUsers.slice(...sliceArgs).includes(computerMove)
+		}
 
 		const isComputerWin = roundResultHelper([1, halfI])
 		const isUserWin = roundResultHelper([halfI])
 		const isDraw = userMove === computerMove;
 
 		return isUserWin && GameResults.user
-		    || isComputerWin && GameResults.computer
-		    || isDraw && GameResults.draw
-		    || ''
+            || isComputerWin && GameResults.computer
+            || isDraw && GameResults.draw
+            || ''
 	}
 
 	get rulesObject() {

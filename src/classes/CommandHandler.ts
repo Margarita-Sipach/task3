@@ -52,6 +52,10 @@ export class CommandHandler {
 		})
 	}
 
+	isMove(command: string){
+		return this._moves.includes(command)
+	}
+
 	private getValidateMessagess() {
 		const validateMessages = [
 			!this.checkAmount() && ValidateMessages.wrongAmount,

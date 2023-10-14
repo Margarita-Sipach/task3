@@ -38,9 +38,14 @@ export class Game {
 		this._computerHandler.showHmac();
 		const selectedCommand = await this._commandHandler.selectCommands();
 
-		if (selectedCommand === PermanentCommands.exit) return
-		if (selectedCommand === PermanentCommands.help) return this._table.show()
-		if (this._commandHandler.moves.includes(selectedCommand)) return this.startRound(selectedCommand)
+		const isExit = selectedCommand === PermanentCommands.exit
+		if (isExit) return
+
+		const isHelp = selectedCommand === PermanentCommands.help
+		if (isHelp) return this._table.show()
+
+		const isMove = this._commandHandler.isMove(selectedCommand)
+		if (isMove) return this.startRound(selectedCommand)
 		
 		return console.log('error')
 	}

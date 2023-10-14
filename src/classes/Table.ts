@@ -13,7 +13,6 @@ export class Table {
 	}
 
 	private generateContent() {
-		const header = [SWITCH_CELL, ...Object.keys(this._rulesObject)];
 		const body = Object.entries(this._rulesObject).map(([key, val]) => {
 			return {
 				[SWITCH_CELL]: key,
