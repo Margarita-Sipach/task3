@@ -40,9 +40,11 @@ export class CommandHandler {
 	}
 
 	validateMoves() {
-		const messages = this.getValidateMessagess();
+		const messages = this.getValidateMessagess(),
+		      messagesAmount = messages.length;
 		messages.forEach(msg => console.log(chalk.red(msg)))
-		return !messages.length
+		if(messagesAmount) console.log(ValidateMessages.example)
+        return !messagesAmount
 	}
 
 	async selectCommands() {
@@ -62,8 +64,6 @@ export class CommandHandler {
 			!this.checkOdd() && ValidateMessages.wrongOdd,
 			!this.checkUniq() && ValidateMessages.wrongUniq
 		].filter(Boolean)
-
-		if(validateMessages.length) console.log(ValidateMessages.example)
 
 		return validateMessages
 	}
