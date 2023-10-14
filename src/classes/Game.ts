@@ -31,11 +31,15 @@ export class Game {
 		this._table = new Table(this._rule.rulesObject)
 	}
 
-	public async start() {
+	start() {
 		const areMovesValid = this._commandHandler.validateMoves()
 		if (!areMovesValid) return;
 
 		this._computerHandler.showHmac();
+		this.selectCommand()
+	}
+
+	async selectCommand(){
 		const selectedCommand = await this._commandHandler.selectCommands();
 
 		const isExit = selectedCommand === PermanentCommands.exit
