@@ -3,10 +3,11 @@ import _ from "lodash"
 
 enum titles {
 	hmac = 'HMAC: ',
-	key = 'HMAC key: '
+	key = 'HMAC key: ',
+	move = 'Computer move: '
 }
 
-const BYTES = 256;
+const BITES = 256;
 const STRING_TYPE = 'hex';
 const ALGORITHM = 'sha256'
 
@@ -17,7 +18,8 @@ export class ComputerHandler {
 	private _hmac: string;
 
 	constructor(moves: string[]) {
-		this._key = crypto.randomBytes(BYTES).toString(STRING_TYPE);
+		const bytes = this.convertBitesInBytes(BITES);
+		this._key = crypto.randomBytes(bytes).toString(STRING_TYPE);
 		this._move = _.sample(moves) || moves[0]
 		this._hmac = this.generateHmac()
 	}
@@ -42,9 +44,18 @@ export class ComputerHandler {
 		console.log(`${titles.key}${this._key}`)
 	}
 
+	showMove() {
+		console.log(`${titles.move}${this._move}`)
+	}
+
 	private generateHmac() {
 		return crypto.createHmac(ALGORITHM, this._key)
 			.update(this._move)
 			.digest(STRING_TYPE);
+	}
+
+	private convertBitesInBytes(bites: number){
+		const amountBitesInByte = 8
+		return bites / amountBitesInByte
 	}
 }

@@ -4,6 +4,10 @@ import { ComputerHandler } from "./ComputerHandler"
 import { Table } from "./Table"
 import { Rule } from "./Rule"
 
+enum Titles{
+	userMove = 'Your move: '
+}
+
 export class Game {
 
 	private static instance: Game;
@@ -35,7 +39,19 @@ export class Game {
 
 		if (selectedCommand === PermanentCommands.exit) return
 		if (selectedCommand === PermanentCommands.help) return this._table.show()
-		if (this._commandHandler.moves.includes(selectedCommand)) return console.log('new round')
+		if (this._commandHandler.moves.includes(selectedCommand)) return this.startRound(selectedCommand)
+		
 		return console.log('error')
+	}
+
+	startRound(userMove: string){
+		this.showUserMove(userMove)
+		this._computerHandler.showMove();
+		this._rule.showRoundResult(userMove, this._computerHandler.move)
+		this._computerHandler.showKey()
+	}
+
+	showUserMove(userMove: string){
+		console.log(`${Titles.userMove}${userMove}`);
 	}
 }
