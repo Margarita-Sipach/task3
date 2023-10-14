@@ -69,7 +69,7 @@ export class CommandHandler {
 	}
 
 	private checkAmount() {
-		return this.movesAmount > MIN_MOVES_AMOUNT
+		return this.movesAmount >= MIN_MOVES_AMOUNT
 	}
 
 	private checkOdd() {
